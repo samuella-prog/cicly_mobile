@@ -1,0 +1,44 @@
+stages:
+  - lint
+  - type
+  - test
+
+variables:
+  FLUTTER_VERSION: "3.19.5"
+
+lint:
+  stage: lint
+  image: cirrusci/flutter:${FLUTTER_VERSION}
+  before_script:
+    - flutter pub get
+  script:
+    - flutter analyze
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+typing:
+  stage: type
+  image: cirrusci/flutter:${FLUTTER_VERSION}
+  before_script:
+    - flutter pub get
+  script:
+    - dart analyze --fatal-infos
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+test:
+  stage: test
+  image: cirrusci/flutter:${FLUTTER_VERSION}
+  before_script:
+    - flutter pub get
+  script:
+    - flutter test --coverage --machine > report.json
+  artifacts:
+    when: always
+    paths:
+      - coverage/
+    reports:
+      junit: report.json
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
