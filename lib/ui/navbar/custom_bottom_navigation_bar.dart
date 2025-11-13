@@ -1,4 +1,3 @@
-import 'package:cicly/assets/custom_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget
@@ -24,7 +23,7 @@ class CustomBottomNavigationBar extends StatelessWidget
         selectedIconTheme: IconThemeData(color: Colors.black),
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        iconSize: 36,
+        iconSize: 28,
         onTap: onTap,
       ),
     );
