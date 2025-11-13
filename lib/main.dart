@@ -1,6 +1,8 @@
+import 'package:cicly/business/services/router.dart';
 import 'package:cicly/ui/buttons/blue_action_button.dart';
-import 'package:cicly/ui/navbar/anon_bottom_navigation_bar.dart';
-import 'package:cicly/ui/navbar/custom_bottom_navigation_bar.dart';
+import 'package:cicly/ui/inputs/date_input.dart';
+import 'package:cicly/ui/inputs/select_input.dart';
+import 'package:cicly/ui/inputs/text_input.dart';
 import 'package:cicly/ui/buttons/pink_action_button.dart';
 import 'package:cicly/ui/navbar/user_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp.router(routerConfig: router);
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic selectedValue;
+
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: CustomColorScheme().surface,
@@ -80,6 +93,21 @@ class MainApp extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: InputBorder.none,
+          labelStyle: TextStyle(height: 0, fontSize: 0),
+          hintStyle: Theme.of(context).textTheme.labelMedium,
+          constraints: BoxConstraints(maxHeight: 40),
+          filled: true,
+          fillColor: CustomColorScheme().surface,
+          errorStyle: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: CustomColorScheme().error),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 12.0,
+            horizontal: 8.0,
+          ),
+        ),
       ),
       home: Scaffold(
         bottomNavigationBar: UserBottomNavigationBar(
@@ -96,19 +124,54 @@ class MainApp extends StatelessWidget {
           },
         ),
         body: Center(
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 16,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 16.0,
             children: [
-              PinkActionButton(
-                text: 'Custom Button',
-                onPressed: () => {print('pink Button Pressed')},
-                icon: Icons.add,
+              TextInput(
+                controller: TextEditingController(),
+                hintText: 'Enter text here',
+                icon: Icons.text_fields,
+                onChanged: (value) => print('Text changed: $value'),
+                labelText: 'Custom Text Input',
               ),
-              BlueActionButton(
-                text: 'Custom Button',
-                onPressed: () => {print('blue Button Pressed')},
-                icon: Icons.add,
+              DateInput(
+                selectedDate: DateTime.now(),
+                onDateSelected: (value) => {},
+                labelText: 'Pick a date',
+                icon: Icons.lock_clock,
+              ),
+              SelectInput(
+                labelText: 'Custom Select Input',
+                icon: Icons.arrow_drop_down_circle,
+                onChanged: (value) => {
+                  print('Selected value: $value'),
+                  selectedValue = value,
+                  print('Updated selectedValue: $selectedValue'),
+                },
+                hint: 'Select an option',
+                value: null,
+                items: [
+                  DropdownMenuEntry(value: 'option 1', label: 'Option 1'),
+                  DropdownMenuEntry(value: 'option 2', label: 'Option 2'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 16,
+                children: [
+                  PinkActionButton(
+                    text: 'Custom Button',
+                    onPressed: () => {print('pink Button Pressed')},
+                    icon: Icons.add,
+                  ),
+                  BlueActionButton(
+                    text: 'Custom Button',
+                    onPressed: () => {print('blue Button Pressed')},
+                    icon: Icons.add,
+                  ),
+                ],
               ),
             ],
           ),
