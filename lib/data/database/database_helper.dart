@@ -32,19 +32,56 @@ class DatabaseHelper {
     const idType = 'TEXT PRIMARY KEY';
     const textType = 'TEXT NOT NULL';
     const intType = 'INTEGER NOT NULL';
+    const dateType = 'TEXT NOT NULL';
     const boolType = 'BOOL NOT NULL'; 
 
     await db.execute('''
           CREATE TABLE menstrual_cycles(
           id $idType,
-          start_date $textType,
-          end_date $textType,
-          mood_description TEXT,
-          contraception $boolType,
-          count_sexuality $intType DEFAULT 0,
-          created_at $textType
+          period_start_date $dateType,
+          period_end_date $dateType,
+          ovulation_end_date TEXT,
+          pms_start_date TEXT,
+          pms_end_date TEXT,
+          created_at $dateType
           )
       ''');
+    await db.execute('''
+      CREATE TABLE mood(
+        id $idType,
+        date $dateType,
+        mood $textType,
+        id_menstrual_cycle $textType,
+        created_at $dateType,
+        FOREIGN KEY (id_menstrual_cycle)
+          REFERENCES menstrual_cycle (id)
+          ON DELETE CASCADE
+      )
+  ''');
+      await db.execute('''
+        CREATE TABLE symptoms (
+        id $idType,
+        id_menstrual_cycle $textType,
+        name $textType,
+        date $dateType,
+        created_at $dateType,
+        FOREIGN KEY (id_menstrual_cycle)
+          REFERENCES menstrual_cycle (id)
+          ON DELETE CASCADE
+        )
+  ''');
+      await db.execute('''
+        CREATE TABLE contraception(
+        id $idType,
+        id_menstrual_cycle $textType,
+        type $textType,
+        date $dateType,
+        created_at $dateType,
+        FOREIGN KEY (id_menstrual_cycle)
+          REFERENCES menstrual_cycle (id)
+          ON DELETE CASCADE
+        )
+''');
 
     await db.execute('''
         CREATE TABLE diseases (
@@ -69,12 +106,24 @@ class DatabaseHelper {
       ''');
     await db.execute('''
       CREATE INDEX idx_cycle_start_date 
-      ON menstrual_cycles(start_date)
+      ON menstrual_cycles(period_start_date)
     ''');
+    await db.execute('''
+      CREATE INDEX idx_mood_cycle 
+      ON mood(id_menstrual_cycle)
+  ''');
+  await db.execute('''
+      CREATE INDEX idx_symptoms_cycle 
+      ON symptoms(id_menstrual_cycle)
+  ''');
     await db.execute('''
       CREATE INDEX idx_flow_cycle 
       ON menstrual_flows(id_menstrual_cycle)
     ''');
+    await db.execute('''
+      CREATE INDEX idx_contraception_cycle
+      ON contraception(id_menstrual_cycle)
+  ''');
   }
 
   Future close() async {
