@@ -72,7 +72,7 @@ class PainScaleState extends State<PainScale> {
               ScaleIconButton(
                 onPressed: () => {_handleScaleSelection(10)},
                 text: '10',
-                icon: Symbols.sentiment_very_dissatisfied,
+                icon: Symbols.sentiment_frustrated,
               ),
             ],
           ),

@@ -25,7 +25,15 @@ class CustomInput extends StatelessWidget {
             children: [
               Icon(icon, color: Colors.black),
               const SizedBox(width: 8.0),
-              Text(labelText, style: Theme.of(context).textTheme.labelLarge),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: Text(
+                  labelText,
+                  style: Theme.of(context).textTheme.labelLarge,
+                  maxLines: 4,
+                  softWrap: true,
+                ),
+              ),
             ],
           ),
           Container(
