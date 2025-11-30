@@ -31,12 +31,10 @@ class DatabaseHelper {
   Future _createDB(Database db, int version) async {
     const idType = 'TEXT PRIMARY KEY';
     const textType = 'TEXT NOT NULL';
-    const intType = 'INTEGER NOT NULL';
-    const dateType = 'TEXT NOT NULL';
-    const boolType = 'BOOL NOT NULL'; 
+    const dateType = 'TEXT NOT NULL'; 
 
     await db.execute('''
-          CREATE TABLE menstrual_cycles(
+          CREATE TABLE menstrual_cycle(
           id $idType,
           period_start_date $dateType,
           period_end_date $dateType,
@@ -86,18 +84,16 @@ class DatabaseHelper {
     await db.execute('''
         CREATE TABLE diseases (
         id $idType,
-        id_List_disease $intType,
+        id_List_disease INTEGER NOT NULL,
         created_at $textType
         )
       ''');
     await db.execute('''
-        CREATE TABLE menstrual_flows (
+        CREATE TABLE menstrual_flow (
           id $idType,
           id_menstrual_cycle $textType,
           flow_date $textType,
           intensity $textType,
-          protection_changes INTEGER,
-          clots $boolType,
           created_at $textType,
           FOREIGN KEY (id_menstrual_cycle)
             REFERENCES menstrual_cycles (id)
