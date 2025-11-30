@@ -13,6 +13,14 @@ class Diseases {
     'idListDisease' : idListDisease
   };
 
+  @override
+  bool operator ==(Object other) => 
+    identical(this, other) || 
+    other is Diseases && runtimeType == other.runtimeType && id == other.id;
+    
+    @override 
+    int get hashCode => id.hashCode;
+
   static getAllMyDiseases(List<Diseases> diseases, String idDisease){
     return diseases.firstWhere(
       (diseases) => diseases.id == idDisease,
