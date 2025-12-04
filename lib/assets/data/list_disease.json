@@ -1,0 +1,62 @@
+[
+    {
+        "id":1,
+        "name": "SOPK",
+        "description" : "Syndrome des ovaires polykystiques"
+    },
+    {
+        "id": 2,
+        "name": "Endométriose",
+        "description": "Présence de tissu endométrial hors de l'utérus"
+    },
+    {
+        "id": 3,
+        "name": "Adénomyose",
+        "description" : "Tissu endométrial dans le muscle utérin"
+    },
+    {
+        "id":4,
+        "name": "Hyperthyroïdie",
+        "description": "Excès de production d'hormones thyroïdiennes"
+    },
+    {
+        "id":5,
+        "name": "Adénomyose",
+        "description": "Tissu endométrial dans le muscle utérin"
+    },
+    {
+        "id":6,
+        "name": "Diabète",
+        "description": "Trouble de la régularisation du glucose"
+    },
+    {
+        "id" : 7,
+        "name": "Anémie",
+        "description" : "Manque de globules rouges ou d'hémoglobin"
+    },
+    {
+        "id":8,
+        "name": "Fibrome utérin",
+        "description": "Tumeur benigne de l'utérus"
+    },
+    {
+        "id" : 9,
+        "name": "Dysménorrhée",
+        "description": "Règles très douloureuses"
+    },
+    {
+        "id":10,
+        "name": "Aménorrhée",
+        "description": "Absence de règles"
+    },
+    {
+        "id": 11,
+        "name": "Hémorragie",
+        "description": "Règles abondantes ou prolongées"
+    },
+    {
+        "id": 12,
+        "name": "Autre",
+        "description": "Autre condition médicale"
+    }
+]
