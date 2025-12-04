@@ -3,10 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SwitchButton extends StatefulWidget {
-  final bool value;
+  bool value;
   final ValueChanged<bool> onChanged;
 
-  const SwitchButton({super.key, required this.value, required this.onChanged});
+  SwitchButton({super.key, required this.value, required this.onChanged});
 
   @override
   State<SwitchButton> createState() => _SwitchButtonState();
@@ -24,6 +24,9 @@ class _SwitchButtonState extends State<SwitchButton> {
       thumbColor: WidgetStateProperty.all(Colors.black),
       onChanged: (newValue) {
         widget.onChanged(newValue);
+        setState(() {
+          widget.value = newValue;
+        });
       },
       value: widget.value,
       inactiveTrackColor: CustomColorScheme().blue,
