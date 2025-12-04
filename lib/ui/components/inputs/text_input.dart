@@ -1,4 +1,4 @@
-import 'package:cicly/ui/inputs/custom_input.dart';
+import 'package:cicly/ui/components/inputs/custom_input.dart';
 import 'package:flutter/material.dart';
 
 class TextInput extends StatelessWidget {

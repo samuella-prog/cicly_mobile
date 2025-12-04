@@ -1,6 +1,6 @@
 import 'package:cicly/assets/custom_color_scheme.dart';
 import 'package:cicly/core/models/mentrual_cycle.dart';
-import 'package:cicly/ui/calendar_legend_item.dart';
+import 'package:cicly/ui/components/calendar_legend_item.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 

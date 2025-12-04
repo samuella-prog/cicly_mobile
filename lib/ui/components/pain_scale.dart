@@ -1,4 +1,4 @@
-import 'package:cicly/ui/buttons/scale_icon_button.dart';
+import 'package:cicly/ui/components/buttons/scale_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 

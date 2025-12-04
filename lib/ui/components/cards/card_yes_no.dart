@@ -1,6 +1,6 @@
 import 'package:cicly/assets/custom_color_scheme.dart';
-import 'package:cicly/ui/buttons/round_icon_button.dart';
-import 'package:cicly/ui/cards/card_base.dart';
+import 'package:cicly/ui/components/buttons/round_icon_button.dart';
+import 'package:cicly/ui/components/cards/card_base.dart';
 import 'package:flutter/material.dart';
 
 /// A card widget that presents a yes/no choice to the user.
