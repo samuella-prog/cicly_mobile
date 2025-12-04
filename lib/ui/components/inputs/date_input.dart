@@ -1,5 +1,5 @@
 import 'package:cicly/assets/custom_color_scheme.dart';
-import 'package:cicly/ui/inputs/custom_input.dart';
+import 'package:cicly/ui/components/inputs/custom_input.dart';
 import 'package:flutter/material.dart';
 
 class DateInput extends StatelessWidget {

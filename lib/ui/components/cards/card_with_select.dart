@@ -1,5 +1,5 @@
-import 'package:cicly/ui/cards/card_base.dart';
-import 'package:cicly/ui/inputs/select_input.dart';
+import 'package:cicly/ui/components/cards/card_base.dart';
+import 'package:cicly/ui/components/inputs/select_input.dart';
 import 'package:flutter/material.dart';
 
 class CardWithSelect extends StatelessWidget {
