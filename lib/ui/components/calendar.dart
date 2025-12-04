@@ -161,9 +161,9 @@ class CalendarState extends State<Calendar> {
     // Ensuite les couleurs du cycle
     switch (dayType) {
       case DayType.period:
-        return CustomColorScheme().pink;
-      case DayType.pms:
         return CustomColorScheme().orange;
+      case DayType.pms:
+        return CustomColorScheme().pink;
       case DayType.ovulation:
         return CustomColorScheme().yellow;
       case DayType.normal:
