@@ -13,7 +13,8 @@ class LinkButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        router.go(route);
+        //TODO: Implement navigation logic
+        print('Navigate to $route');
       },
       child: Text(
         text,

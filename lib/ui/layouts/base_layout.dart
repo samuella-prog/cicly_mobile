@@ -1,5 +1,4 @@
 import 'package:cicly/assets/custom_color_scheme.dart';
-import 'package:cicly/business/services/router.dart';
 import 'package:cicly/ui/components/navbar/anon_bottom_navigation_bar.dart';
 import 'package:cicly/ui/components/navbar/user_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
