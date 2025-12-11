@@ -11,6 +11,10 @@ class Symptom {
     required this.date,
   });
 
+  factory Symptom.fromJson(Map<String, dynamic> map){
+    return Symptom(id: map['id'], idMenstrualCycle: map ['idMenstrualCycle'], name: map ['name'], date: map ['date']);
+  }
+
   Map<String, dynamic> toMap() => {
     'id': id,
     'id_menstrual_cycle': idMenstrualCycle,
