@@ -53,6 +53,7 @@ class CycleRepository{
     return Menstrualcycle.fromMap(results.first);
   }
 
+  // pas mentionner dans le doc j'ai rajouté
   Future<List<Menstrualcycle>> getLastNCycles(int n) async {
     final db = await _dbHelper.database;
     final results = await db.query('menstrual_cycle',
@@ -103,5 +104,57 @@ Future<int> deleteCycle(String id) async {
   Future<bool> hasCycles() async {
     final count = await getCycleCount();
     return count >0;
+  }
+  Future<DateTime?> getPeriodStrartDate(String cycleId) async {
+    final cycle = await getCycleById(cycleId);
+    return cycle?.periodStartDate;
+  }
+  Future<DateTime?> getPeriodEndDate(String cycleId) async {
+    final cycle = await getCycleById(cycleId);
+    return cycle?.periodEndDate;
+  }
+  Future<DateTime?> getOvulationDate(String cycleId) async {
+    final cycle = await getCycleById(cycleId);
+    return cycle?.ovulationDate;
+  }
+  Future<DateTime?> getPmsStartDate(String cycleId) async {
+    final cycle = await getCycleById(cycleId);
+    return cycle?.pmsEndDate;
+  }
+  Future<DateTime?> getPmsEndDate(String cycleId) async {
+    final cycle = await getCycleById(cycleId);
+    return cycle?.pmsEndDate;
+  }
+
+  Future<int> setPeriodStartDate(String cycleId, DateTime newDate) async {
+    final db = await _dbHelper.database;
+    return await db.update(
+      'menstrual_cycle', 
+      {'period_start_date': newDate.toIso8601String()},
+      where: 'id = ?',
+      whereArgs: [cycleId],
+    );
+  }
+
+  Future<int> setPeriodEndDate(String cycleId, DateTime newDate) async {
+    final db = await _dbHelper.database;
+    return await db.update('menstrual_cycle', {'period_end_date': newDate.toIso8601String()},
+    where: 'id = ?',
+    whereArgs: [cycleId],
+    );
+  }
+  Future<int> setPmsStartDate(String cycleId, DateTime newDate) async {
+    final db = await _dbHelper.database;
+    return await db.update('menstrual_cycle', {'pms_start_date': newDate.toIso8601String()},
+    where: 'id = ?',
+    whereArgs: [cycleId],
+    );
+  }
+  Future<int> setPmsEndDate(String cycleId, DateTime newDate) async {
+    final db = await _dbHelper.database;
+    return await db.update('menstrual_cycle', {'pms_end_date': newDate.toIso8601String()},
+    where: 'id = ?',
+    whereArgs: [cycleId],
+    );
   }
 }
