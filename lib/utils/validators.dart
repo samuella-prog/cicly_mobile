@@ -1,5 +1,3 @@
-import 'package:cicly/business/validators/onboarding_validator.dart';
-
 class OnboardingValidators{
 
   static ValidationResult validatePeriodDates({
