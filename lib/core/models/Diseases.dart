@@ -13,6 +13,10 @@ class Diseases {
     'idListDisease' : idListDisease
   };
 
+  factory Diseases.fromJson(Map<String,dynamic> map){
+    return Diseases(id: map['id'], idListDisease: map ['idListDiseases']) ;
+  }
+
   @override
   bool operator ==(Object other) => 
     identical(this, other) || 
