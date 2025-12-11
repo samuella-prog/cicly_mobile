@@ -1,4 +1,6 @@
+import 'package:cicly/core/models/Diseases.dart';
 import 'package:cicly/data/database/database_helper.dart';
+import 'package:cicly/data/local/disease_list_loader.dart';
 import 'package:uuid/uuid.dart';
 
 class DiseaseRepository {
@@ -69,4 +71,9 @@ class DiseaseRepository {
 
     return result.first['count'] as int;
   }
+  Future<List<Diseases>> getAllDiseases() async {
+  // Charge TOUTES les maladies du JSON (pas celles de l'utilisatrice)
+  return await DiseaseListLoader.loadDiseases();
+}
+
 }
