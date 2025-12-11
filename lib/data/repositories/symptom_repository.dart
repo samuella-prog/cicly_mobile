@@ -91,5 +91,26 @@ class SymptomRepository {
     );
     return result.first['count'] as int;
   }
+
+  Future<int> setSymptom(String symptomId, String newName, DateTime newDate) async {
+    final db = await _dbHelper.database;
+    return await db.update(
+      'symptoms', 
+      {
+        'name' : newName,
+        'date': newDate.toIso8601String(),
+      },
+      where: 'id = ?',
+      whereArgs: [symptomId],
+    );
+  }
+
+  Future<int> setMenstrualCycle(String symptomId, String newCycleId) async {
+    final db = await _dbHelper.database;
+    return await db.update('symptoms', {'id_menstrual_cycle' : newCycleId},
+    where: 'id = ?',
+    whereArgs: [symptomId],
+    );
+  }
   
 }
