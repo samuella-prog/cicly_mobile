@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Douleurs abdominales basses"
+    },
+    {
+        "id": 2,
+        "name": "Ballonnements"
+    },
+    {
+        "id": 3,
+        "name": "Maux de tête"
+    },
+    {
+        "id": 4,
+        "name": "Nausées"
+    },
+    {
+        "id": 5,
+        "name": "Fatigue"
+    },
+    {
+        "id": 6,
+        "name": "Sautes d'humeur"
+    },
+    {
+        "id": 7,
+        "name": "Douleurs mammaires"
+    },
+    {
+        "id": 8,
+        "name": "Acné"
+    },
+    {
+        "id": 9,
+        "name": "Insomnie"
+    },
+    {
+        "id": 10,
+        "name": "Vertiges"
+    }
+]
