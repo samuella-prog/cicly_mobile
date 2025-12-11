@@ -21,7 +21,7 @@ class SymptomRepository {
     return symptomId;
   }
 
-  Future<List<Symptom>> getSymptomsByCycle(String cycleId) async {
+  Future<List<Symptom>> getSymptomsByMenstrualCycle(String cycleId) async {
     final db = await _dbHelper.database;
     final results = await db.query('symptoms',
     where: 'id_menstrual_cycle = ?',
@@ -32,7 +32,7 @@ class SymptomRepository {
     return results.map((map) => Symptom.fromMap(map)).toList();
   }
 
-  Future<List<Symptom>> getSymptomsByDate(DateTime date) async{
+  Future<List<Symptom>> getSymptomByDate(DateTime date) async{
     final db = await _dbHelper.database;
     final dateStr = date.toIso8601String().split('T')[0];
 
@@ -71,7 +71,7 @@ class SymptomRepository {
     );
   }
 
-  Future<List<Symptom>> getSymptomsByDateRange({
+  Future<List<Symptom>> getSymptomsBetweenDate({
     required DateTime start,
     required DateTime end,
   }) async {
