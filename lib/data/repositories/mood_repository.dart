@@ -20,7 +20,7 @@ class MoodRepository {
     return moodId;
   }
 
-  Future<List<Mood>> getMoodsByCycle(String cycleId) async {
+  Future<List<Mood>> getMoodByMenstrualCycle(String cycleId) async {
     final db = await _dbHelper.database;
     final results = await db.query('mood',
     where: 'id_menstrual_cycle = ?',
@@ -80,5 +80,28 @@ class MoodRepository {
     );
 
     return results.map((map) => Mood.fromMap(map)).toList();
+  }
+  Future<int> setMood(String moodId, String newMood, DateTime newDate) async {
+    final db = await _dbHelper.database;
+    return await db.update(
+      'mood', 
+      {'mood' : newMood,
+      'date' : newDate.toIso8601String(),
+      },
+      where: 'id = ?',
+      whereArgs: [moodId],
+      );
+  }
+  Future<int> setMenstrualCycle(String moodId, String newCycleId) async {
+    final db = await _dbHelper.database;
+    return await db.update(
+      'mood', {'id_menstrual_cycle' : newCycleId},
+      where: 'id = ?',
+      whereArgs: [moodId],
+    );
+  }
+
+  Future<List<String>> getCommonsMood() async {
+    return [];
   }
 }
