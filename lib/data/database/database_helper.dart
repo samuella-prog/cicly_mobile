@@ -73,7 +73,8 @@ class DatabaseHelper {
         id $idType,
         id_menstrual_cycle $textType,
         type $textType,
-        date $dateType,
+        daily_in_take TEXT,
+        renewal TEXT,
         created_at $dateType,
         FOREIGN KEY (id_menstrual_cycle)
           REFERENCES menstrual_cycle (id)
