@@ -1,5 +1,0 @@
-class Cyclerepostery {
-
-  //méthode createCycle 
-  
-}
