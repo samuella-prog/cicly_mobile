@@ -1,0 +1,145 @@
+class OnboardingViewModel extends ChangeNotifier {
+  final OnboardingService _service;
+  final DiseaseImpactAnalyzer _diseaseAnalyzer;
+
+  OnboardingViewModel({
+    OnboardingService? service,
+    DiseaseImpactAnalyzer? diseaseAnalyzer,
+  })  : _service = service ?? OnboardingService(),
+        _diseaseAnalyzer = diseaseAnalyzer ?? DiseaseImpactAnalyzer();
+
+  // État
+  OnboardingData _data = OnboardingData();
+  List<Disease> _availableDiseases = [];
+  List<String> _recommendations = [];
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  // Getters pour l'UI
+  OnboardingData get data => _data;
+  List<Disease> get availableDiseases => _availableDiseases;
+  List<String> get recommendations => _recommendations;
+  bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
+  bool get canProceed => _data.canProceed;
+
+  /// Initialiser le ViewModel (appeler au démarrage)
+  Future<void> init() async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      _availableDiseases = await _service.loadAvailableDiseases();
+    } catch (e) {
+      _errorMessage = 'Erreur lors du chargement';
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+
+  void setPeriodStartDate(DateTime date) {
+    _data.periodStartDate = date;
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+  void setPeriodEndDate(DateTime date) {
+    _data.periodEndDate = date;
+    _errorMessage = null;
+    notifyListeners();
+  }
+
+
+  void toggleDisease(int diseaseId) {
+    final diseases = List<int>.from(_data.selectedDiseaseIds);
+    
+    if (diseases.contains(diseaseId)) {
+      diseases.remove(diseaseId);
+    } else {
+      diseases.add(diseaseId);
+    }
+    
+    _data.selectedDiseaseIds = diseases;
+    notifyListeners();
+    
+    _updateRecommendations();
+  }
+
+
+  bool isDiseaseSelected(int diseaseId) {
+    return _data.selectedDiseaseIds.contains(diseaseId);
+  }
+
+
+  bool validate() {
+    final validation = _service.validateOnboardingData(_data);
+    
+    if (!validation.isValid) {
+      _errorMessage = validation.firstError;
+      notifyListeners();
+      return false;
+    }
+
+    if (validation.hasWarnings) {
+      _errorMessage = validation.firstWarning;
+      notifyListeners();
+    }
+
+    return true;
+  }
+
+
+  Future<bool> complete() async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    final result = await _service.completeOnboarding(_data);
+
+    if (!result.isSuccess) {
+      _errorMessage = result.message;
+      _isLoading = false;
+      notifyListeners();
+      return false;
+    }
+
+    if (result.warnings.isNotEmpty) {
+      _errorMessage = result.message;
+    }
+
+    _isLoading = false;
+    notifyListeners();
+    return true;
+  }
+
+  /// Mettre à jour les recommandations
+  // Future<void> _updateRecommendations() async {
+  //   if (_data.selectedDiseaseIds.isEmpty) {
+  //     _recommendations = [];
+  //     return;
+  //   }
+
+  //   try {
+  //     _recommendations = await _diseaseAnalyzer.getPersonalizedRecommendations();
+  //     notifyListeners();
+  //   } catch (e) {
+  //     print('Erreur recommandations: $e');
+  //   }
+  // }
+
+  /// Réinitialiser
+  void reset() {
+    _data = OnboardingData();
+    _errorMessage = null;
+    _recommendations = [];
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+}
