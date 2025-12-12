@@ -20,7 +20,7 @@ class DiseaseRepository {
       batch.insert('diseasses', {
         'id': _uuid.v4(),
         'id_list_disease': diseaseId,
-        'created_at': DateTime.now(),
+        'created_at': DateTime.now().toIso8601String(),
       });
     }
     await batch.commit(noResult: true);
@@ -43,6 +43,11 @@ class DiseaseRepository {
     final db = await _dbHelper.database;
     final results = await db.query('diseases');
 
+    return results.map((map) => map['id_list_disease'] as int).toList();
+  }
+  Future<List<int>> getAllMyDiseases() async {
+    final db = await _dbHelper.database;
+    final results = await db.query('diseases');
     return results.map((map) => map['id_list_disease'] as int).toList();
   }
 
