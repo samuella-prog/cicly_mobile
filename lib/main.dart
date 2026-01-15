@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'data/database/local_database.dart'; // adapte si besoin
 
-void main() {
+Future<void> main() async {
+  // Required for secure storage and sqflite_sqlcipher
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize the encrypted database
+  await LocalDatabase.instance.database;
+
   runApp(const MainApp());
 }
 
