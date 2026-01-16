@@ -14,11 +14,17 @@ import 'package:cicly/ui/mood_scale.dart';
 import 'package:cicly/ui/navbar/user_bottom_navigation_bar.dart';
 import 'package:cicly/ui/pain_scale.dart';
 import 'package:flutter/material.dart';
+import 'data/database/local_database.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'assets/custom_color_scheme.dart';
+Future<void> main() async {
+  // Required for secure storage and sqflite_sqlcipher
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  // Initialize the encrypted database
+  await LocalDatabase.instance.database;
+
   runApp(const MainApp());
 }
 
